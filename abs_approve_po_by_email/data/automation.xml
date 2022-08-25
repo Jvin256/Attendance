@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="rule_generate_add_line_on_create" model="base.automation">
+        <field name="name">Automation: Create Additional Details</field>
+        <field name="state">code</field>
+        <field name="code" >
+        record.CreatePurchaseAdditionalLine()
+        </field>
+        <field name="trigger">on_write</field>
+        <field name="trigger_field_ids" eval="[(6, 0, [ ref('purchase.field_purchase_order_line__product_qty')])]"/>
+        <field name="active" eval="True"/>
+        <field name="model_id" ref="purchase.model_purchase_order_line"/>
+        <field name="filter_domain">[]</field>
+        <field name="filter_pre_domain">[]</field>
+    </record>
+</odoo>

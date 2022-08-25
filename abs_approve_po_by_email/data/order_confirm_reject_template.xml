@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+   <template id="order_confirmation_template_id" name="Order Confirmation Template">
+        <t t-call="website.layout">
+            <div id="wrap" class="oe_structure oe_empty">
+                <div class="container mt16">
+                    <h2 class="text-center">You have approved this Purchase Order.</h2>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="order_reject_template_id" name="Order Reject Template">
+        <t t-call="website.layout">
+            <div id="wrap" class="oe_structure oe_empty">
+                <div class="container mt16">
+                    <h2 class="text-center">You have rejected this Purchase Order.</h2>
+                </div>
+            </div>
+        </t>
+    </template>
+    
+    <template id="order_block_template_id" name="Order Reject Template">
+        <t t-call="website.layout">
+            <div id="wrap" class="oe_structure oe_empty">
+                <div class="container mt16">
+                    <h2 class="text-center">This Purchase Order has been approved / rejected.</h2>
+                </div>
+            </div>
+        </t>
+    </template>    
+
+    <record id="order_confirmation_template_page_id" model="website.page">
+        <field name="url">/order_confirmed</field>
+        <field name="is_published">True</field>
+        <field name="view_id" ref="abs_approve_po_by_email.order_confirmation_template_id"/>
+    </record>
+
+    <record id="order_reject_template_page_id" model="website.page">
+        <field name="url">/order_rejected</field>
+        <field name="is_published">True</field>
+        <field name="view_id" ref="abs_approve_po_by_email.order_reject_template_id"/>
+    </record>
+
+    <record id="order_block_template_page_id" model="website.page">
+        <field name="url">/order_block</field>
+        <field name="is_published">True</field>
+        <field name="view_id" ref="abs_approve_po_by_email.order_block_template_id"/>
+    </record>
+
+</odoo>

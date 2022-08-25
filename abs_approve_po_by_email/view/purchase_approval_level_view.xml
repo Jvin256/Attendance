@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="purchase_approval_level_tree_view" model="ir.ui.view">
+        <field name="name">purchase.approval.level.tree</field>
+        <field name="model">purchase.approval.level</field>
+        <field name="priority">2</field>
+        <field name="arch" type="xml">
+            <tree string="Levels">
+                <field name="name"/>
+                <field name="sequence"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="purchase_approval_level_form_view" model="ir.ui.view">
+        <field name="name">purchase.approval.level.form</field>
+        <field name="model">purchase.approval.level</field>
+        <field name="arch" type="xml">
+            <form string="Level">
+                <sheet>
+                    <group>
+                        <field name="name" required="1"/>
+                        <field name="sequence" required="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id='purchase_approval_level_action' model='ir.actions.act_window'>
+        <field name="name">Levels</field>
+        <field name="res_model">purchase.approval.level</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+            action="purchase_approval_level_action"
+            id="purchase_approval_level_id"
+            parent="purchase.menu_purchase_config"
+            name="Purchase Approval Levels"
+            groups="abs_approve_po_by_email.group_purchase_approval_matrix"
+    />
+</odoo>

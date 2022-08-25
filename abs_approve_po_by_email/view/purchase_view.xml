@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="inherit_purchase_order_form_for_approval_user">
+        <field name="name">purchase.order.form</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='origin']" position="replace"/>
+            <xpath expr="//field[@name='payment_term_id']" position="replace"/>
+            <xpath expr="//field[@name='fiscal_position_id']" position="replace"/>
+            <xpath expr="//header" position="inside">
+                <button name="get_matrix_id" string="Send Reminder" type="object" class="oe_highlight"  attrs="{'invisible': [('state', '!=', 'to approve')]}"/>
+            </xpath>
+            <xpath expr="//label[@for='date_planned']" position="attributes">
+                <attribute name="string">Delivery Date</attribute>
+            </xpath>
+            <xpath expr="//field[@name='currency_id']" position="after">
+                <field name="user_id" string="Requestor" sequence="1"/>
+                <field name="purpose" required="1"/>
+                <field name="req_justification" sequence="3"/>
+                <field name="ecpic"  sequence="4"/>
+                <field name="justification" sequence="5"/>
+
+
+            </xpath>
+            <xpath expr="//field[@name='tax_totals_json']" position="after">
+                <field name="amount_in_usd" readonly="1"/>
+            </xpath>
+            <xpath expr="//page[@name='purchase_delivery_invoice']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+<!--           <xpath expr="//field[@name='origin']" position="after">-->
+<!--               <field name='purpose' required="1"/>-->
+<!--               <field name='justification'/>-->
+<!--               <field name="cc_user_id"/>-->
+<!--               <field name='level_id' readonly="1"/>-->
+<!--           </xpath>-->
+           <xpath expr="//notebook/page[@name='products']" position="after">
+               <page string="Additional Details">
+                   <field name="purchase_additional_details_ids">
+                       <tree editable="bottom">
+                           <field name="product_id" required="1"/>
+                           <field name="quantity" required="1"/>
+                           <field name="company_id"/>
+                           <field name="location" required="1"/>
+                           <field name="details"/>
+                           <field name="for_staff" required="1"/>
+                           <field name="position" required="1"/>
+                           <field name="warranty" required="1"/>
+                           <field name="remark" required="1"/>
+                       </tree>
+                   </field>
+               </page>
+           </xpath>
+           <xpath expr="//notebook" position="inside">
+                <page string="Purchase Approval History">
+                    <field name="purchase_approval_history_ids" readonly="1">
+                        <tree editable="bottom">
+                            <field name="level_id"/>
+                            <field name="user_id"/>
+                            <field name="approval_history_datetime"/>
+                            <field name="status_approval"/>
+                        </tree>
+                    </field> 
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="inherit_purchase_order_kpis_tree">
+        <field name="name">purchase.order.tree</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_kpis_tree"/>
+        <field name="arch" type="xml">
+           <xpath expr="//field[@name='state']" position="after">
+               <field name='level_id'/>
+           </xpath>
+        </field>
+    </record>
+
+<!--     <record model="ir.ui.view" id="inherit_purchase_order_form_incoterm">-->
+<!--        <field name="name">purchase.order.form</field>-->
+<!--        <field name="model">purchase.order</field>-->
+<!--        <field name="inherit_id" ref="purchase_stock.purchase_order_view_form_inherit"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//field[@name='incoterm_id']" position="replace"/>-->
+<!--        </field>-->
+<!--     </record>-->
+
+</odoo>

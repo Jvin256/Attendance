@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data>
+        <record id="group_purchase_approval_matrix" model="res.groups">
+            <field name="name">Purchase approval matrix</field>
+        </record>
+    </data>
+</odoo>
